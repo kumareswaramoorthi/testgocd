@@ -2,7 +2,7 @@ hello:
 	echo "Hello"
 
 build:
-	go build -o testg main.go
+	docker build -t gocdtest .
 
 run:
-	./testg
+	docker run -p 8084:8084 -t gocdtest
