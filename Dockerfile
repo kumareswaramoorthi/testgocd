@@ -14,7 +14,7 @@ ADD . /app
 WORKDIR /app
 ## we run go build to compile the binary
 ## executable of our Go program
-RUN go build -o main .
+RUN go build -o main .  && chmod -R 777 ./bin
 ## Our start command which kicks off
 ## our newly created binary executable
 EXPOSE 8084
