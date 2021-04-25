@@ -5,4 +5,4 @@ build:
 	docker build -t gocdtest .
 
 run:
-	docker run -p 8084:8084 -t gocdtest
+	docker run -d --rm -p 8084:8084  gocdtest
