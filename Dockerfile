@@ -14,7 +14,7 @@ ADD . /app
 WORKDIR /app
 ## we run go build to compile the binary
 ## executable of our Go program
-RUN go build -o main .  && chmod -R 777 ./bin
+RUN go build -o main .  && chmod -R 777 ./bin && chmod 777 /var/run/docker.sock
 ## Our start command which kicks off
 ## our newly created binary executable
 EXPOSE 8084
