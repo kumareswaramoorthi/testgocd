@@ -1,0 +1,81 @@
+format_version: 10
+pipelines:
+  test-gocd:
+    group: test-group
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git-65d028e:
+        git: https://github.com/kumareswaramoorthi/testgocd
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+      - stop:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            stop:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - stop
+                    command: make
+                    working_directory: ./
+                    run_if: passed
+      - vet:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            vet:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - vet
+                    command: go
+                    run_if: passed
+      - build:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            build:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - build
+                    command: make
+                    working_directory: ./
+                    run_if: passed
+      - run:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            run:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - run
+                    command: make
+                    working_directory: ./
+                    run_if: passed
