@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  test-gocd:
+  test-gocd-yaml:
     group: test-group
     label_template: ${COUNT}
     lock_behavior: none
